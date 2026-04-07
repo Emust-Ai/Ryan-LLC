@@ -5,8 +5,8 @@ services:
     build: .
     container_name: ryan-voice-ai
     restart: always
-    expose:
-      - "3018"
+    ports:
+      - "3018:3018"
     env_file:
       - .env
     environment:
@@ -18,31 +18,3 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
-    networks:
-      - voice-network
-
-  nginx:
-    image: nginx:alpine
-    container_name: ryan-voice-nginx
-    restart: always
-    ports:
-      - "3018:3018"
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
-    depends_on:
-      - voice-agent
-    networks:
-      - voice-network
-
-  # Uncomment certbot if you need SSL later
-  # certbot:
-  #   image: certbot/certbot
-  #   container_name: ryan-voice-certbot
-  #   volumes:
-  #     - ./certbot/conf:/etc/letsencrypt
-  #     - ./certbot/www:/var/www/certbot
-  #   entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
-
-networks:
-  voice-network:
-    driver: bridge
