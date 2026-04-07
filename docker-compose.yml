@@ -3,7 +3,7 @@ version: '3.8'
 services:
   voice-agent:
     build: .
-    container_name: ask-voice-ai
+    container_name: ryan-voice-ai
     restart: always
     expose:
       - "3018"
@@ -23,7 +23,7 @@ services:
 
   nginx:
     image: nginx:alpine
-    container_name: ask-voice-nginx
+    container_name: ryan-voice-nginx
     restart: always
     ports:
       - "3018:3018"
@@ -38,7 +38,7 @@ services:
 
   certbot:
     image: certbot/certbot
-    container_name: ask-voice-certbot
+    container_name: ryan-voice-certbot
     volumes:
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
