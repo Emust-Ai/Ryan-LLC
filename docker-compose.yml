@@ -6,7 +6,7 @@ services:
     container_name: ryan-voice-ai
     restart: always
     ports:
-      - "3018:3018"
+      - "127.0.0.1:3019:3018"
     env_file:
       - .env
     environment:
