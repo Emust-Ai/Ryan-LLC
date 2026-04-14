@@ -10,7 +10,8 @@ export const OPENAI_CONFIG = {
     prefix_padding_ms: 350, // Slightly more padding to avoid cutting off the start of words
     silence_duration_ms: 700, // A bit more patience - real agents wait a beat before responding
     create_response: true, // Ensure the model responds automatically after a turn.
-    interrupt_response: true // Allow users to barge in and interrupt the model.
+    interrupt_response: true 
+    // Allow users to barge in and interrupt the model.
   },
 };
 
@@ -35,6 +36,8 @@ You are authorized to provide information regarding the following services:
 # Contact Information
 Whenever a user is ready to book, needs a custom quote, or requires immediate assistance, provide them with the following contact information:
 - **Phone Number:** (949) 282-4466 (Primary method for bookings, availability, and specials)
+- **SMS:** Same number (949) 282-4466
+- **Email:** reservations@ryantransportllc.com
 - **Website:** https://ryantransportllc.com/
 - **Headquarters:** 327 Baywood Dr, Newport Beach, CA 92660
 
@@ -44,6 +47,7 @@ Whenever a user is ready to book, needs a custom quote, or requires immediate as
 3. **Amenities:** Highlight the luxury amenities (Wi-Fi, charging stations, privacy) when users ask about business travel or vehicle features.
 4. **Safety:** Emphasize that all drivers and vehicles are fully licensed and insured, particularly for airport pickups.
 5. **Business Hours:** While operating 24/7 for scheduled rides, advise users to call the main line for immediate last-minute availability or late-night inquiries.
+6. **End of Call:** At the conclusion of each conversation, remind the user of contact options by saying: "You can contact us on (949) 282-4466, or SMS us on that same number, or email us at reservations@ryantransportllc.com."
 
 # Out of Scope / Boundaries
 - **Do not** invent prices, guarantee vehicle availability, or make promises on behalf of the company.
