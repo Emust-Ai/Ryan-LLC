@@ -349,22 +349,21 @@ class ChatwootLogger {
         .map(msg => `${msg.role === 'user' ? 'Client' : 'Assistant'}: ${msg.text}`)
         .join('\n');
 
-      // Use Azure OpenAI Chat Completion to generate summary
-      const endpoint = process.env.AZURE_OPENAI_CHAT_ENDPOINT || process.env.AZURE_OPENAI_ENDPOINT;
-      const chatApiKey = process.env.AZURE_OPENAI_CHAT_API_KEY || process.env.AZURE_OPENAI_API_KEY;
-      const chatDeployment = process.env.AZURE_OPENAI_CHAT_DEPLOYMENT || 'gpt-4o-mini';
-      const chatApiVersion = process.env.AZURE_OPENAI_CHAT_API_VERSION || '2024-12-01-preview';
-      
-      if (!endpoint || !chatApiKey) {
-        console.log('Azure OpenAI Chat not configured, using basic summary');
+      // Use OpenAI Chat Completion to generate summary
+      const openaiApiKey = process.env.OPENAI_API_KEY;
+      const chatModel = process.env.OPENAI_CHAT_MODEL || 'gpt-4o-mini';
+
+      if (!openaiApiKey) {
+        console.log('OpenAI not configured, using basic summary');
         return this.generateBasicSummary();
       }
 
-      console.log(`Generating AI summary using deployment: ${chatDeployment}`);
-      
+      console.log(`Generating AI summary using model: ${chatModel}`);
+
       const response = await axios.post(
-        `${endpoint}/openai/deployments/${chatDeployment}/chat/completions?api-version=${chatApiVersion}`,
+        'https://api.openai.com/v1/chat/completions',
         {
+          model: chatModel,
           messages: [
             {
               role: 'system',
@@ -388,7 +387,7 @@ Sois concis - maximum 5-6 lignes au total.`
         },
         {
           headers: {
-            'api-key': chatApiKey,
+            'Authorization': `Bearer ${openaiApiKey}`,
             'Content-Type': 'application/json'
           }
         }
